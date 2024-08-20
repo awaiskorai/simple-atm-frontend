@@ -6,13 +6,23 @@ class Account {
   #pin;
   #id;
   #username;
-  constructor(owner, movements = [], interestRate = 10, pin) {
+  constructor(
+    owner,
+    movements = [],
+    interestRate = 10,
+    pin,
+    movementDates = [],
+    locale = 'en-us'
+  ) {
     this.#id = this.generateId();
     this.#owner = owner;
     this.#movements = movements;
     this.#interestRate = interestRate;
     this.#pin = pin;
     this.#username = this.generateUserName(owner);
+    this.movementDates = movementDates;
+    this.locale = locale;
+    this.loans = [];
   }
 
   generateId() {

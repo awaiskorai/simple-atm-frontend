@@ -19,6 +19,28 @@ class CurrencyDatabase {
     }
   }
 
+  static formatCurrencySingle(
+    amount,
+    locale = 'en-us',
+    options = { style: 'currency', currency: 'USD' }
+  ) {
+    if (!isFinite(amount))
+      throw new Error('The currency must be have a valid format');
+    return Intl.NumberFormat(locale, options).format(amount);
+  }
+
+  static formatCurrencyArray(
+    amountArray,
+    locale = 'en-us',
+    options = { style: 'currency', currency: 'USD' }
+  ) {
+    if (!amountArray.some(amount => isFinite(amount)))
+      throw new Error('The currency must be have a valid format');
+
+    return amountArray.map(amount =>
+      Intl.NumberFormat(locale, options).format(amount)
+    );
+  }
   movementConvertor(movements, currencyFrom, currencyTo, exchangeRate) {
     if (movements instanceof Array != true)
       throw new Error(

@@ -27,6 +27,16 @@ class AccountDatabase {
       return (this.accounts[accIndex] = account);
     }
   }
+
+  getAccountIndexByUsername(username) {
+    const index = this.accounts.findIndex(acc => acc.username === username);
+    return index;
+  }
+
+  deleteAccount(index) {
+    const deleteAccount = this.accounts.splice(index, 1);
+    return deleteAccount;
+  }
 }
 const accountsDB = new AccountDatabase();
 export { accountsDB };
